@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { Link, NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import './appHeader.scss';
 
 const AppHeader = () => {
@@ -6,18 +7,20 @@ const AppHeader = () => {
 		<header className='header'>
 			<div className='app__header'>
 				<h1 className='app__title'>
-					<a href='#'>
+					{/* Link заменяет обычную ссылку. to='' указывает на какой элемент она должна направлять */}
+					<Link to='/'>
 						<span>Marvel</span> information portal
-					</a>
+					</Link>
 				</h1>
 				<nav className='app__menu'>
 					<ul>
 						<li>
-							<a href='#'>Characters</a>
+							{/* NavLink позволяет добавить активный класс и стиль для динамичного отображения активной ссылки */}
+							<NavLink exact activeStyle={{'color': '#9f0013'}} to='/'>Characters</NavLink>
 						</li>
 						/
 						<li>
-							<a href='#'>Comics</a>
+							<NavLink exact activeStyle={{'color': '#9f0013'}} to='comics'>Comics</NavLink>
 						</li>
 					</ul>
 				</nav>
