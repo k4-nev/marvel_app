@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import './comicsList.scss';
 import useMarvelService from '../../services/MarvelService';
 import { useList } from '../../hooks/useList.hook';
@@ -24,13 +26,13 @@ const ComicsList = () => {
 			return (
 				<li className='comics__item' key={comics.id}>
 					{/* eslint-disable-next-line */}
-					<a href='#'>
+					<Link to={`/comics/${comics.id}`}>
 						{spinner}
 						{errorMessage}
 						{componentThumbnail}
 						<div className='comics__item-name'>{comics.title}</div>
 						<div className='comics__item-price'>{comics.price}</div>
-					</a>
+					</Link>
 				</li>
 			);
 		});

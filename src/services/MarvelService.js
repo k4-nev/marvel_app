@@ -23,6 +23,11 @@ const useMarvelService = () => {
 		return res.data.results.map(_transformComics);
 	}
 
+	const getComic = async (id) => {
+		const res = await request(`${_apiBase}comics/${id}?${_apiKey}`);
+		return _transformComics(res.data.results[0]);
+	};
+
 	const _transformCharacter = (char) => {
 		const imgNotAvailable = "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg";
 		const thumbnail = char.thumbnail.path + '.' + char.thumbnail.extension;
@@ -42,19 +47,21 @@ const useMarvelService = () => {
 	const _transformComics = (comics) => {
 		const imgNotAvailable = "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg";
 		const thumbnailComics = comics.thumbnail.path + '.' + comics.thumbnail.extension;
-		const changImgNotAvailable = thumbnailComics === imgNotAvailable ? "https://w0.peakpx.com/wallpaper/567/525/HD-wallpaper-not-found-advisory-black-funny-minimal-simple-texxt-warning.jpg" : thumbnailComics;// const changComicsImgNotAvailable = '';
-
-		const priceNotAvailable = comics.prices[0].price > 0 ? comics.prices[0].price + '$' : 'No price';
+		const changImgNotAvailable = thumbnailComics === imgNotAvailable ? "https://w0.peakpx.com/wallpaper/567/525/HD-wallpaper-not-found-advisory-black-funny-minimal-simple-texxt-warning.jpg" : thumbnailComics;
 
 		return {
 			id: comics.id,
 			title: comics.title,
-			price: priceNotAvailable,
-			thumbnail: changImgNotAvailable
+			price: comics.prices[0].price || 'No price',
+			thumbnail: changImgNotAvailable,
+
+			description: comics.description || 'There is no description',
+			pageCount: comics.pageCount ? `${comics.pageCount} p.` : 'No info about the number pages',
+			language: comics.textObjects.language || 'en-us'
 		}
 	}
 
-	return {loading, error, getAllCharacters, getCharacters, clearError, getAllComics}
+	return {loading, error, getAllCharacters, getCharacters, clearError, getAllComics, getComic}
 }
 
 export default useMarvelService;

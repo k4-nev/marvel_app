@@ -4,11 +4,11 @@
 import {
 	BrowserRouter as Router,
 	Route,
-	Switch,
-} from 'react-router-dom/cjs/react-router-dom.min';
+	Routes /* в React Router v.5 - это Switch */,
+} from 'react-router-dom';
 
 import AppHeader from '../appHeader/AppHeader';
-import { MainPage, ComicsPage } from '../pages';
+import { MainPage, ComicsPage, Page404, SingleComicPage } from '../pages';
 
 const App = () => {
 	return (
@@ -17,17 +17,15 @@ const App = () => {
 			<div className='app'>
 				<AppHeader />
 				<main>
-					{/* Switch нужен для рендера только конкретного элемента */}
-					<Switch>
-						{/* Маршрут. path='/' - так указывается главная страница. Exact нужен для точного отображения нужного элемента. */}
-						<Route exact path='/'>
-							<MainPage />
-						</Route>
-						{/* Маршрут. Путь к дополнительной странице */}
-						<Route exact path='/comics'>
-							<ComicsPage />
-						</Route>
-					</Switch>
+					{/* Switch (в v6+ Rotes) нужен для рендера только конкретного элемента. */}
+					{/* Маршрут. path='/' - так указывается главная страница. Exact нужен для точного отображения нужного элемента. */}
+					{/* В версии v6+ нужный для отображения элемент помещается в element  */}
+					<Routes>
+						<Route path='/' element={<MainPage />} />
+						<Route path='/comics' element={<ComicsPage />}/>
+						<Route path='/comics/:comicId' element={<SingleComicPage />}/>
+						<Route path='*' element={<Page404 />}/>
+					</Routes>
 				</main>
 			</div>
 		</Router>
