@@ -6,7 +6,7 @@ export const useList = (getList, valueOffset, limitList) => {
 	const [ended, setEnded] = useState(false);
 	
 	const onRequest = (offset) => {
-		getList(offset).then(comicsLoaded);
+		getList(offset, limitList).then(comicsLoaded);
 	};
 
 	useEffect(() => {

@@ -8,7 +8,7 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
 
 const CharList = (props) => {
 	const { loading, error, getAllCharacters } = useMarvelService();
-	const { list, offset, ended, onRequest } = useList(getAllCharacters, 831, 6);
+	const { list, offset, ended, onRequest } = useList(getAllCharacters, 732, 9);
 
 	const itemsRefs = useRef([]);
 
