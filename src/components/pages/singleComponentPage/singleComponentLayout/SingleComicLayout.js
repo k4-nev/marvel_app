@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import './singleComponentLayout.scss';
 
@@ -7,7 +8,15 @@ const SingleComicLayout = ({ data }) => {
 
 	return (
 		<div className='single-component'>
-			<img src={thumbnail} alt={title} className='single-component__img single-component__img_comic' />
+			<Helmet>
+				<meta name='description' content={`${title} comics book`} />
+				<title>{title}</title>
+			</Helmet>
+			<img
+				src={thumbnail}
+				alt={title}
+				className='single-component__img single-component__img_comic'
+			/>
 			<div className='single-component__info'>
 				<h2 className='single-component__name'>{title}</h2>
 				<p className='single-component__descr'>{description}</p>

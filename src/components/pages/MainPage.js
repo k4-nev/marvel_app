@@ -1,4 +1,8 @@
 import { useState } from 'react';
+/* библиотека react-helmet нужна для seo-оптимизации
+	link: https://github.com/nfl/react-helmet
+*/
+import { Helmet } from 'react-helmet';
 
 import RandomChar from '../randomChar/RandomChar';
 import CharList from '../charList/CharList';
@@ -17,6 +21,14 @@ const MainPage = () => {
 
 	return (
 		<>
+			{/* Использование Helmet, внутри прописываются meta-теги и title для динамического изменения на каждой странице  */}
+			<Helmet>
+				<meta
+					name='description'
+					content='Marvel info portal'
+				/>
+				<title>MARVEL APP</title>
+			</Helmet>
 			<ErrorBoundary>
 				<RandomChar />
 			</ErrorBoundary>

@@ -1,13 +1,22 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import './singleComponentLayout.scss';
 
 const SingleCharLayout = ({ data }) => {
-	const {name, description, thumbnail} = data;
+	const { name, description, thumbnail } = data;
 
 	return (
 		<div className='single-component'>
-			<img src={thumbnail} alt={name} className='single-component__img single-component__img_char' />
+			<Helmet>
+				<meta name='description' content={`${name} character`} />
+				<title>{name}</title>
+			</Helmet>
+			<img
+				src={thumbnail}
+				alt={name}
+				className='single-component__img single-component__img_char'
+			/>
 			<div className='single-component__info'>
 				<h2 className='single-component__name'>{name}</h2>
 				<p className='single-component__descr'>{description}</p>
