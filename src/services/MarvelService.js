@@ -8,11 +8,14 @@ const useMarvelService = () => {
 	const _baseOffsetCharacters = 54;
 	const _baseOffsetComics = 80;
 
-	const getAllCharacters = async (offset = _baseOffsetCharacters, limit = 6) => {
-		const res = await request(
+	const getAllCharacters = async (
+		offset = _baseOffsetCharacters,
+		limit = 6
+	) => {
+		const {data: {results}} = await request(
 			`${_apiBase}characters?limit=${limit}&offset=${offset}&${_apiKey}`
 		);
-		return res.data.results.map(_transformCharacter);
+		return results.map(_transformCharacter);
 	};
 
 	const getCharacters = async (id) => {
@@ -20,8 +23,10 @@ const useMarvelService = () => {
 		return _transformCharacter(res.data.results[0]);
 	};
 
-	const getCharactersByName = async (name) => {
-		const res = await request(`${_apiBase}characters?name=${name}&${_apiKey}`);
+	const getCharactersByName = async (name, limit = 5) => {
+		const res = await request(
+			`${_apiBase}characters?nameStartsWith=${name}&limit=${limit}&${_apiKey}`
+		);
 		return res.data.results.map(_transformCharacter);
 	};
 

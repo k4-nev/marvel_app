@@ -73,7 +73,7 @@ const View = ({ char }) => {
 				)}
 				{comics.map((item, i) => {
 					// eslint-disable-next-line
-					if (i >= 10) return;
+					if (i >= 5) return;
 					return (
 						<li key={i} className='char__comics-item'>
 							{item.name}
